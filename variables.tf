@@ -5,9 +5,6 @@ variable "aws_key_name" {}
 variable "aws_region" {
   default = "us-west-2"
 }
-variable "install_docker_services" {
-  default = "false"
-}
 
 variable "cf1_az" {
     default = {
@@ -22,17 +19,8 @@ variable "cf1_az" {
     }
 }
 
-variable "cf2_az" {
-    default = {
-        us-east-1 = "us-east-1e"
-        us-west-1 = "us-west-1b"
-        us-west-2 = "us-west-2b"
-        ap-northeast-1 = "ap-northeast-1b"
-        ap-southeast-1 = "ap-southeast-1b"
-        ap-southeast-2 = "ap-southeast-2b"
-        eu-west-1 = "eu-west-1b"
-        sa-east-1 = "sa-east-1b"
-    }
+variable "aws_vpc_name" {
+  default = "cf-vpc"
 }
 
 variable "network" {
@@ -140,51 +128,6 @@ variable runner_z1_count {
         med-ha = "1"
         big-ha = "3"
     }
-}
-
-variable backbone_z2_count {
-    default = {
-        small  = "0"
-        med    = "0"
-        med-ha = "1"
-        big-ha = "2"
-    }
-}
-variable api_z2_count {
-    default = {
-        small  = "0"
-        med    = "0"
-        med-ha = "1"
-        big-ha = "2"
-    }
-}
-variable services_z2_count {
-    default = {
-        small  = "0"
-        med    = "0"
-        med-ha = "1"
-        big-ha = "2"
-    }
-}
-variable health_z2_count {
-    default = {
-        small  = "0"
-        med    = "0"
-        med-ha = "1"
-        big-ha = "1"
-    }
-}
-variable runner_z2_count {
-    default = {
-        small  = "0"
-        med    = "0"
-        med-ha = "1"
-        big-ha = "3"
-    }
-}
-
-variable "private_cf_domains" {
-    default = ""
 }
 
 variable additional_cf_sg_allow_1 { default = "" }

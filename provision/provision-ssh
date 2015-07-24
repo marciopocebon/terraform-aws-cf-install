@@ -8,6 +8,7 @@ state_file="${STATE_FILE:-./terraform.tfstate}"
 keyPath=$(terraform output -state="${state_file}" aws_key_path | sed -e "s#^~#$HOME#")
 scriptPath="provision/provision.sh"
 targetPath="/home/ubuntu/provision.sh"
+targetKeyPath="/home/ubuntu/bosh.pem"
 bastionIP=$(terraform output -state="${state_file}" bastion_ip)
 maxConnectionAttempts=10
 sleepSeconds=10
@@ -27,4 +28,5 @@ do
   ((index+=1))
 done
 
+scp -o StrictHostKeyChecking=no -i ${keyPath} $keyPath ubuntu@$bastionIP:$targetKeyPath
 ssh -i ${keyPath} ubuntu@$bastionIP "chmod +x $targetPath ; $targetPath"
